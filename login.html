@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1a1a1a">
+  <title>Payments FORever - Secure Login</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="images/icons/icon-72x72.png" type="image/png">
+
+  <style>
+    /* Main container for the login page content */
+    .login-main {
+        padding: 4rem 1rem; /* Adjust padding for visual space */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+    }
+
+    /* Overall section containing the image and form */
+    .login-section {
+        background-color: var(--card-bg-color); /* Use your existing card background color */
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        overflow: hidden; /* Ensures rounded corners on children */
+        display: flex; /* Use flexbox for image and form layout */
+        flex-direction: column; /* Stack image and form on small screens */
+        max-width: 900px; /* Max width for the entire login component */
+        width: 100%;
+    }
+
+    /* Container for the login image */
+    .login-image-container {
+        flex: 1; /* Allow image container to grow/shrink */
+        background-color: #000; /* Fallback/background for image */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden; /* Crop image if necessary */
+    }
+
+    .login-image {
+        width: 100%;
+        height: 250px; /* Fixed height for image on small screens */
+        object-fit: cover; /* Cover the container, cropping as needed */
+        display: block;
+    }
+
+    /* Container for the login form and text */
+    .login-form-container {
+        flex: 1; /* Allow form container to grow/shrink */
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .login-form-container h2 {
+        font-size: 2.2rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .login-form-container p {
+        font-size: 1rem;
+        color: var(--light-text-color);
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+    }
+
+    .login-form-container strong {
+        color: var(--text-color); /* Highlight strong text */
+    }
+
+    .login-form-container em {
+        color: var(--accent-color); /* Highlight emphasized text */
+    }
+
+    /* Styling for the PayPal login box */
+    .login-box {
+        background-color: #333; /* Slightly lighter than card-bg-color */
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-top: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-box h3 {
+        font-size: 1.8rem;
+        color: var(--accent-color);
+        margin-bottom: 0.8rem;
+    }
+
+    .login-box p {
+        font-size: 0.95rem;
+        color: var(--light-text-color);
+        margin-bottom: 1.5rem;
+    }
+
+    /* Styling for the PayPal button container */
+    #paypal-button-container {
+        max-width: 300px; /* Limit width of PayPal button */
+        margin: 0 auto; /* Center the button */
+    }
+
+    /* Footer adjustments for the login page */
+    .main-footer small {
+        display: block;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+        color: var(--light-text-color);
+    }
+
+    /* Responsive Design for Login Page */
+    @media (min-width: 768px) {
+        .login-section {
+            flex-direction: row; /* Side-by-side on larger screens */
+            text-align: left; /* Align text to left within containers */
+        }
+
+        .login-image-container {
+            flex: 1;
+        }
+
+        .login-image {
+            height: 100%; /* Make image fill height on larger screens */
+            max-height: 450px; /* Max height for desktop image */
+        }
+
+        .login-form-container {
+            flex: 1;
+            padding: 3rem; /* More padding on larger screens */
+            text-align: left; /* Align text to left */
+        }
+
+        .login-form-container h2 {
+            font-size: 2.5rem;
+        }
+
+        .login-form-container p {
+            font-size: 1.05rem;
+        }
+
+        .login-box {
+            padding: 2rem;
+        }
+
+        .login-box h3 {
+            font-size: 2rem;
+        }
+
+        #paypal-button-container {
+            margin: 0; /* Remove auto margin to align left */
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .login-form-container {
+            padding: 4rem; /* Even more padding on large screens */
+        }
+
+        .login-form-container h2 {
+            font-size: 2.8rem;
+        }
+
+        .login-form-container p {
+            font-size: 1.1rem;
+        }
+    }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="container header-content">
+      <h1 class="logo"><a href="index.html">Payments FORever</a></h1>
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+      </button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="login.html" class="active">Login</a></li>
+          <li><a href="signup.html">Sign Up</a></li>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="contact.html">Support</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="login-main container">
+    <section class="login-section">
+      <div class="login-container">
+
+        <div class="login-image-container">
+          <img src="https://shorturl.at/0UAzq" alt="Secure Digital Wallet" class="login-image">
+        </div>
+
+        <div class="login-form-container">
+          <h2>Login to Payments FORever</h2>
+          <p>We use trusted third-party providers like PayPal to securely handle user authentication and payments.</p>
+          <p><strong>Many financial institutions rely on third parties such as:</strong>
+            <em>PayPal, Stripe, Square, Razorpay, Apple Pay, Google Pay</em>, and even other banks through correspondent banking relationships — to help facilitate transactions.</p>
+
+          <div class="login-box">
+            <h3>Log in with PayPal</h3>
+            <p>Use your existing PayPal account to securely log in to Payments FORever.</p>
+
+            <a href="https://www.paypal.com/signin" class="btn">Login with PayPal Account</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container footer-content">
+      <p>&copy; 2025 Payments FORever. All rights reserved.</p>
+      <p><small>This site uses third-party services like PayPal to facilitate secure login and payments. By continuing, you agree to our Terms of Service and Privacy Policy.</small></p>
+      <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&scope=email%20profile"></script>
+
+  <script>
+    // Render PayPal Login Button
+    paypal.Buttons({
+      createOrder() {
+        return undefined;
+      },
+      onApprove(data, actions) {
+        console.log('User approved PayPal login:', data);
+
+        return fetch(`https://api.sandbox.paypal.com/v1/identity/oauth2/userinfo?schema=paypalv1.1`, {
+          headers: {
+            'Authorization': `Bearer ${data.authorization_token}`,
+            'Accept': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(userInfo => {
+          localStorage.setItem('user', JSON.stringify({
+            id: userInfo.user_id,
+            name: userInfo.name,
+            email: userInfo.email,
+            provider: 'PayPal'
+          }));
+          window.location.href = 'dashboard.html';
+        });
+      },
+      onError(err) {
+        console.error('PayPal login error:', err);
+        alert('There was an issue logging in with PayPal.');
+      }
+    }).render('#paypal-button-container');
+  </script>
+</body>
+</html>

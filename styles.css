@@ -1,0 +1,593 @@
+/* Basic Resets & Global Styles */
+:root {
+    --primary-color: #007bff; /* A blue for accents */
+    --secondary-color: #1a1a1a; /* Dark background */
+    --text-color: #ffffff; /* Light text */
+    --light-text-color: #cccccc; /* Slightly lighter text */
+    --accent-color: #ff4500; /* Orange for highlights */
+    --border-color: #333;
+    --card-bg-color: #282828;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem; /* Consistent padding on sides */
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Header Styles */
+.main-header {
+    background-color: #000;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+}
+
+.logo {
+    font-size: 1.8rem; /* Mobile first */
+    font-weight: bold;
+    color: var(--text-color);
+    letter-spacing: 1px;
+}
+
+.logo a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.menu-toggle {
+    display: block; /* Show hamburger on mobile */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    position: relative; /* For accessibility positioning of menu */
+    z-index: 1001; /* Ensure it's above other elements when menu is open */
+}
+
+.hamburger {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-color);
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* Hamburger animation */
+.menu-toggle.active .hamburger:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active .hamburger:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.active .hamburger:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+.main-nav {
+    display: none; /* Hidden by default on mobile */
+    width: 100%; /* Take full width below logo on mobile */
+    flex-basis: 100%; /* For flex wrapping */
+    margin-top: 1rem; /* Space below logo */
+    background-color: #222; /* Background for dropdown menu */
+    padding: 1rem 0;
+    border-radius: 5px;
+}
+
+.main-nav.active {
+    display: block; /* Show when active */
+}
+
+.main-nav ul {
+    list-style: none;
+    text-align: center;
+}
+
+.main-nav ul li {
+    margin-bottom: 0.8rem;
+}
+
+.main-nav ul li a {
+    color: var(--light-text-color);
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    transition: color 0.3s ease;
+    display: block; /* Make whole area clickable */
+}
+
+.main-nav ul li a:hover,
+.main-nav ul li a.active {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+
+/* Hero Section Styles */
+.hero-section {
+    /* Using the provided Hero Section image */
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://www.pnc.com/content/dam/pnc-thought-leadership/personal-finance/spend/pnc_insights_p_what-are-digital-payments.jpg') no-repeat center center/cover;
+    min-height: 400px; /* Mobile first min-height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-color);
+    padding: 2rem 1rem; /* Mobile padding */
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-content h2 {
+    font-size: 2.5rem; /* Mobile first font size */
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.1rem; /* Mobile first font size */
+    margin-bottom: 1.5rem;
+    color: var(--light-text-color);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 0.8rem 1.8rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #e63900; /* Darker orange on hover */
+    text-decoration: none;
+}
+
+/* General Content Section Styles */
+.content-section {
+    padding: 3rem 1rem;
+    background-color: var(--card-bg-color);
+    margin-top: 2rem; /* Space below hero */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+}
+
+.content-section h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.content-section p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--light-text-color);
+}
+
+/* Features Section (Image/Text Alternating) */
+.features-section {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column; /* Stack vertically on mobile */
+    align-items: center;
+    gap: 1.5rem;
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    margin-bottom: 2rem; /* Space between items */
+    text-align: center; /* Center text on mobile */
+}
+
+.feature-item.reverse {
+    /* No special mobile treatment, handled by media queries */
+}
+
+.feature-image {
+    width: 100%; /* Full width on mobile */
+    max-width: 400px; /* Limit image size */
+    flex-shrink: 0; /* Prevent image from shrinking */
+}
+
+.feature-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+    display: block; /* Remove extra space below image */
+}
+
+.feature-text {
+    flex-grow: 1;
+}
+
+.feature-text h4 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+}
+
+.feature-text p {
+    font-size: 1rem;
+    color: var(--light-text-color);
+}
+
+/* --- */
+/* Games Catalog Section */
+.games-catalog-section {
+    padding: 3rem 1rem;
+    background-color: var(--card-bg-color);
+    margin-top: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2rem;
+    text-align: center; /* Center text elements within the section */
+}
+
+.games-catalog-section h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.section-description {
+    font-size: 1.1rem;
+    color: var(--light-text-color);
+    margin-bottom: 2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column on mobile */
+    gap: 1.5rem; /* Space between cards */
+}
+
+.game-card {
+    background-color: #333;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures image corners are rounded */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.7);
+}
+
+.game-image-wrapper {
+    width: 100%;
+    /* Maintain aspect ratio for images. Adjust as needed. */
+    padding-bottom: 56.25%; /* 16:9 Aspect Ratio (height / width * 100) */
+    position: relative;
+    overflow: hidden;
+    background-color: #000; /* Placeholder background */
+}
+
+.game-image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the area, cropping if necessary */
+    display: block;
+}
+
+.game-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows info section to take available space */
+}
+
+.game-info h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.game-info p {
+    font-size: 0.95rem;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Allows paragraph to grow and push button down */
+}
+
+.btn-small {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 0.6rem 1.2rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    align-self: flex-start; /* Align button to the left within flex column */
+}
+
+.btn-small:hover {
+    background-color: #e63900; /* Darker orange on hover */
+    text-decoration: none;
+}
+
+
+/* Footer Styles */
+.main-footer {
+    background-color: #000;
+    color: var(--light-text-color);
+    padding: 2rem 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.social-links a {
+    color: var(--light-text-color);
+    margin: 0 0.8rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Responsive Design - Media Queries */
+
+/* Tablet (12-inch screen is roughly 768px - 1024px wide) */
+@media (min-width: 768px) {
+    .header-content {
+        flex-wrap: nowrap; /* Prevent wrapping for header elements */
+    }
+
+    .logo {
+        font-size: 2.2rem;
+    }
+
+    .menu-toggle {
+        display: none; /* Hide hamburger on larger screens */
+    }
+
+    .main-nav {
+        display: block; /* Always show nav on larger screens */
+        width: auto;
+        flex-basis: auto;
+        margin-top: 0;
+        background: none;
+        padding: 0;
+    }
+
+    .main-nav ul {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    .main-nav ul li {
+        margin-bottom: 0;
+    }
+
+    .main-nav ul li a {
+        font-size: 1rem;
+        padding: 0.5rem 0; /* Adjust padding for horizontal menu */
+    }
+
+    .hero-section {
+        min-height: 500px; /* Tablet min-height */
+        padding: 3rem 2rem;
+    }
+
+    .hero-content h2 {
+        font-size: 3.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.25rem;
+    }
+
+    .content-section {
+        padding: 4rem 2rem;
+    }
+
+    .content-section h3 {
+        font-size: 2.5rem;
+    }
+
+    .content-section p {
+        font-size: 1.1rem;
+    }
+
+    .features-section {
+        padding: 3rem 2rem;
+    }
+
+    .feature-item {
+        flex-direction: row; /* Layout side-by-side on tablet and up */
+        text-align: left;
+        align-items: flex-start; /* Align items to the start of the cross-axis */
+        gap: 2rem;
+        padding: 2rem;
+    }
+
+    .feature-item.reverse {
+        flex-direction: row-reverse; /* Swap order for reversed items */
+    }
+
+    .feature-image {
+        width: 45%; /* Adjust width for side-by-side layout */
+        max-width: none; /* Remove max-width on larger screens */
+    }
+
+    .feature-text {
+        width: 55%; /* Adjust width for side-by-side layout */
+    }
+
+    .feature-text h4 {
+        font-size: 2rem;
+    }
+
+    .feature-text p {
+        font-size: 1.1rem;
+    }
+
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    /* Games Catalog Responsive Tablet */
+    .games-catalog-section h2 {
+        font-size: 2.8rem;
+    }
+
+    .section-description {
+        font-size: 1.2rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 2 columns or more */
+        gap: 2rem;
+    }
+    
+    .game-info h3 {
+        font-size: 1.6rem;
+    }
+
+    .game-info p {
+        font-size: 1rem;
+    }
+}
+
+/* Desktop (21-inch screen is typically 1440px wide or more) */
+@media (min-width: 1024px) {
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    .main-nav ul li a {
+        font-size: 1.1rem;
+    }
+
+    .hero-section {
+        min-height: 600px; /* Desktop min-height */
+        padding: 4rem 3rem;
+    }
+
+    .hero-content h2 {
+        font-size: 4.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.4rem;
+    }
+
+    .content-section {
+        padding: 5rem 3rem;
+    }
+
+    .content-section h3 {
+        font-size: 3rem;
+    }
+
+    .content-section p {
+        font-size: 1.2rem;
+    }
+
+    .features-section {
+        padding: 4rem 3rem;
+    }
+
+    .feature-item {
+        gap: 3rem;
+        padding: 3rem;
+    }
+
+    .feature-image {
+        width: 40%;
+    }
+
+    .feature-text {
+        width: 60%;
+    }
+
+    /* Games Catalog Responsive Desktop */
+    .games-catalog-section h2 {
+        font-size: 3.2rem;
+    }
+
+    .section-description {
+        font-size: 1.3rem;
+    }
+
+    .games-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 3 or 4 columns */
+        gap: 2.5rem;
+    }
+}
+
+@media (min-width: 1200px) { /* Large Desktop Specific Adjustment for Games Grid */
+    .games-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Possibly 4 columns with larger cards */
+    }
+}

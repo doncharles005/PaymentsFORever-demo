@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Dashboard - Payments FORever</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="images/icons/icon-72x72.png" type="image/png">
+
+    <style>
+        .dashboard-main {
+            padding: 2rem 1rem; /* Adjust padding for top/bottom space */
+            flex-grow: 1; /* Allows main content to fill available space */
+        }
+
+        /* Overall grid layout for the dashboard sections */
+        .dashboard-layout-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 1.5rem; /* Space between main dashboard cards */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem; /* Consistent padding like .container */
+        }
+
+        /* Generic styling for all dashboard cards (mimicking .card-bg-color) */
+        .dashboard-card {
+            background-color: var(--card-bg-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column; /* Stack content within cards on mobile */
+            color: var(--text-color);
+        }
+
+        .dashboard-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .dashboard-card p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            line-height: 1.6;
+            margin-bottom: 0.8rem; /* Default paragraph margin */
+        }
+
+        .dashboard-card .btn, .dashboard-card .btn-small {
+            align-self: flex-start; /* Align buttons to the left within flex column */
+            margin-top: 1rem;
+        }
+
+        /* User Profile & Account Summary Card */
+        .user-profile-card {
+            text-align: center;
+            align-items: center;
+        }
+
+        .user-profile-card .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .user-profile-card .user-name {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .user-profile-card .account-balance {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .user-profile-card .balance-info {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .user-profile-card .qr-code {
+            width: 120px;
+            height: 120px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        /* Quick Actions Grid */
+        .quick-actions-card h3 {
+             text-align: left;
+        }
+        .quick-actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Auto-fit columns */
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .quick-action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #333; /* Slightly darker than card background */
+            padding: 0.8rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .quick-action-item:hover {
+            transform: translateY(-3px);
+            background-color: #444;
+            text-decoration: none;
+        }
+
+        .quick-action-item .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color); /* Icon color */
+        }
+        .quick-action-item .text {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+        }
+
+        /* Recent Transactions */
+        .recent-transactions-card h3 {
+             text-align: left;
+        }
+        .transaction-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem;
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-item .details {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .transaction-item .name {
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .transaction-item .type {
+            font-size: 0.85rem;
+            color: var(--light-text-color);
+        }
+
+        .transaction-item .amount {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .transaction-item .amount.income {
+            color: #28a745; /* Green for income */
+        }
+
+        .transaction-item .amount.expense {
+            color: #dc3545; /* Red for expense */
+        }
+
+        .transaction-item .date {
+            font-size: 0.85rem;
+            color: var(--light-text-color);
+            margin-left: 1rem;
+        }
+
+        /* Payment Methods Card */
+        .payment-methods-card h3 {
+             text-align: left;
+        }
+        .payment-methods-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column for payment methods on mobile */
+            gap: 1rem;
+        }
+
+        .payment-method-item {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--light-text-color);
+            transition: background-color 0.2s ease;
+        }
+
+        .payment-method-item:hover {
+            background-color: #444;
+        }
+
+        .payment-method-item .logo {
+            width: 50px;
+            height: 30px;
+            object-fit: contain;
+            filter: grayscale(100%); /* Make logos grayscale */
+            opacity: 0.7;
+        }
+
+        .payment-method-item strong {
+            color: var(--text-color);
+        }
+        .payment-method-item .actions {
+            margin-left: auto; /* Push actions to the right */
+        }
+
+        /* Rewards & Offers Card */
+        .rewards-offers-card h3 {
+            text-align: left;
+        }
+        .rewards-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 1.5rem;
+        }
+
+        .reward-item {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .reward-item h4 {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+        .reward-item p {
+            font-size: 0.9rem;
+            color: var(--light-text-color);
+            flex-grow: 1;
+            margin-bottom: 1rem;
+        }
+        .reward-item .btn-small {
+            align-self: center;
+            margin-top: 0.5rem;
+        }
+
+        /* Full width cards for larger sections */
+        .dashboard-card.full-width {
+            grid-column: 1 / -1; /* Span full width in grid */
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .dashboard-layout-grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns for tablet */
+                gap: 2rem;
+            }
+
+            .user-profile-card {
+                grid-column: 1 / 3; /* Span both columns on tablet */
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                text-align: left;
+            }
+            .user-profile-card .profile-info {
+                flex-grow: 1;
+            }
+            .user-profile-card .qr-code-wrapper {
+                margin-left: 2rem;
+            }
+
+            .quick-actions-card h3,
+            .recent-transactions-card h3,
+            .payment-methods-card h3,
+            .rewards-offers-card h3 {
+                 text-align: left; /* Align headings left on wider screens */
+            }
+
+            .quick-actions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* More columns for actions */
+            }
+
+            .recent-transactions-card {
+                grid-column: 1 / 3; /* Span both columns */
+            }
+
+            .payment-methods-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Two columns for payment methods */
+            }
+
+            .rewards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Two columns for rewards */
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .dashboard-layout-grid {
+                grid-template-columns: 1fr 1fr 1fr; /* Three columns for desktop */
+                gap: 2.5rem;
+            }
+
+            .user-profile-card {
+                grid-column: 1 / 4; /* Span all three columns */
+            }
+
+            .recent-transactions-card {
+                grid-column: 1 / 4; /* Span all three columns */
+            }
+
+            .quick-actions-card {
+                grid-column: 1 / 2; /* Occupy first column */
+            }
+            .payment-methods-card {
+                grid-column: 2 / 3; /* Occupy second column */
+            }
+            .rewards-offers-card {
+                grid-column: 3 / 4; /* Occupy third column */
+            }
+             .quick-actions-grid {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); 
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">Payments FORever</a></h1>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="dashboard-main">
+        <div class="dashboard-layout-grid">
+
+            <div class="dashboard-card user-profile-card">
+                <img src="https://placehold.co/80x80/007bff/ffffff/png?text=JD" alt="User Avatar" class="avatar">
+                <div class="profile-info">
+                    <p class="user-name" id="dashboardUserName">Welcome, John Doe!</p>
+                    <p class="account-balance">$1,234.56 USD</p>
+                    <p class="balance-info">Available Balance across all accounts</p>
+                </div>
+                <div class="qr-code-wrapper">
+                    <img src="https://placehold.co/120x120/1a1a1a/ffffff?text=QR+Code" alt="QR Code for Payments" class="qr-code">
+                    <p class="light-text-color" style="font-size: 0.8rem; margin-top: 0.5rem;">Wallet ID: PFA7B3X9</p>
+                </div>
+            </div>
+
+            <div class="dashboard-card quick-actions-card">
+                <h3>Quick Actions</h3>
+                <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">💸</span>
+                        <span class="text">Send</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">🤝</span>
+                        <span class="text">Receive</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">⬆️</span>
+                        <span class="text">Top-up</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">🧾</span>
+                        <span class="text">Pay Bills</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">💳</span>
+                        <span class="text">Scan & Pay</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <span class="icon">✂️</span>
+                        <span class="text">Split Bill</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dashboard-card payment-methods-card">
+                <h3>Cards & Payment Methods</h3>
+                <div class="payment-methods-grid">
+                    <div class="payment-method-item">
+                        <img src="https://placehold.co/50x30/000000/ffffff?text=VISA" alt="Visa Logo" class="logo">
+                        <span>Visa **** 1234</span>
+                        <span class="actions"><a href="#" style="color: var(--primary-color);">Edit</a></span>
+                    </div>
+                    <div class="payment-method-item">
+                        <img src="https://placehold.co/50x30/000000/ffffff?text=Bank" alt="Bank Logo" class="logo">
+                        <span>Savings **** 5678</span>
+                        <span class="actions"><a href="#" style="color: var(--primary-color);">Edit</a></span>
+                    </div>
+                    <div class="payment-method-item">
+                        <img src="https://placehold.co/50x30/000000/ffffff?text=PayPal" alt="PayPal Logo" class="logo">
+                        <span>PayPal Linked</span>
+                        <span class="actions"><a href="#" style="color: var(--primary-color);">Unlink</a></span>
+                    </div>
+                    <a href="#" class="btn-small" style="align-self: center; margin-top: 1.5rem;">+ Add New Method</a>
+                </div>
+            </div>
+
+            <div class="dashboard-card rewards-offers-card">
+                <h3>Rewards & Offers</h3>
+                <div class="rewards-grid">
+                    <div class="reward-item">
+                        <h4>10% Cashback on Groceries!</h4>
+                        <p>Get 10% back on all grocery purchases this month. Expires: Jul 31</p>
+                        <a href="#" class="btn-small">Claim Now</a>
+                    </div>
+                    <div class="reward-item">
+                        <h4>Invite a Friend - $5 Bonus</h4>
+                        <p>Refer a friend to Payments FORever and both get $5 when they sign up.</p>
+                        <a href="#" class="btn-small">Refer Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-card recent-transactions-card full-width">
+                <h3>Recent Transactions</h3>
+                <ul class="transaction-list">
+                    <li class="transaction-item">
+                        <div class="details">
+                            <span class="name">Starbucks Coffee</span><br>
+                            <span class="type">Bill Payment</span>
+                        </div>
+                        <span class="amount expense">-$5.75</span>
+                        <span class="date">Jul 18, 2025</span>
+                    </li>
+                    <li class="transaction-item">
+                        <div class="details">
+                            <span class="name">Received from Sarah L.</span><br>
+                            <span class="type">P2P Transfer</span>
+                        </div>
+                        <span class="amount income">+$75.00</span>
+                        <span class="date">Jul 17, 2025</span>
+                    </li>
+                    <li class="transaction-item">
+                        <div class="details">
+                            <span class="name">Deposit from Bank Account</span><br>
+                            <span class="type">Top-up</span>
+                        </div>
+                        <span class="amount income">+$200.00</span>
+                        <span class="date">Jul 16, 2025</span>
+                    </li>
+                    <li class="transaction-item">
+                        <div class="details">
+                            <span class="name">Netflix Subscription</span><br>
+                            <span class="type">Subscription</span>
+                        </div>
+                        <span class="amount expense">-$15.99</span>
+                        <span class="date">Jul 15, 2025</span>
+                    </li>
+                    <li class="transaction-item">
+                        <div class="details">
+                            <span class="name">To Alex B.</span><br>
+                            <span class="type">P2P Transfer</span>
+                        </div>
+                        <span class="amount expense">-$30.00</span>
+                        <span class="date">Jul 14, 2025</span>
+                    </li>
+                </ul>
+                <a href="#" class="btn-small" style="align-self: flex-end; margin-top: 1.5rem;">View All Transactions</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Payments FORever. All rights reserved.</p>
+            <p><small>This site uses third-party services like PayPal to facilitate secure login and payments. By continuing, you agree to our Terms of Service and Privacy Policy.</small></p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Placeholder for user name from localStorage (as in login.html)
+        document.addEventListener('DOMContentLoaded', () => {
+            const userNameElement = document.getElementById('dashboardUserName');
+            const storedUser = localStorage.getItem('user');
+            if (userNameElement && storedUser) {
+                try {
+                    const user = JSON.parse(storedUser);
+                    if (user && user.name) {
+                        userNameElement.textContent = `Welcome, ${user.name}!`;
+                    }
+                } catch (e) {
+                    console.error("Failed to parse user from localStorage:", e);
+                }
+            }
+        });
+
+        // Register service worker (same as other pages)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered! Scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Dashboard - Payments FORever</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="images/icons/icon-72x72.png" type="image/png">
+    <!-- No new internal styles are added as per your request -->
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">Payments FORever</a></h1>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li> <!-- Mark Dashboard as active -->
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="content-section container">
+            <h2>Welcome to Your Dashboard, [User Name]!</h2>
+            <p class="section-description">Manage your funds, view transactions, and perform quick actions with ease.</p>
+
+            <div class="dashboard-grid">
+                <!-- Account Balance Card (adapting feature-item like structure) -->
+                <div class="feature-item dashboard-card balance-card">
+                    <div class="feature-text">
+                        <h4>Current Balance</h4>
+                        <p class="balance-amount">$1,234.56 USD</p>
+                        <p class="light-text-color">Available Funds</p>
+                    </div>
+                    <div class="feature-image">
+                        <!-- Placeholder for a balance icon or small chart -->
+                        <img src="https://placehold.co/100x100/007bff/ffffff?text=Balance" alt="Balance Icon">
+                    </div>
+                </div>
+
+                <!-- Quick Actions Section (adapting games-grid for buttons) -->
+                <div class="feature-item dashboard-card quick-actions">
+                    <div class="feature-text">
+                        <h4>Quick Actions</h4>
+                        <div class="action-buttons-grid">
+                            <a href="#" class="btn-small">Send Money</a>
+                            <a href="#" class="btn-small">Receive Money</a>
+                            <a href="#" class="btn-small">Add Funds</a>
+                            <a href="#" class="btn-small">Withdraw</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions Section -->
+                <div class="feature-item dashboard-card full-width-card">
+                    <div class="feature-text">
+                        <h4>Recent Transactions</h4>
+                        <ul class="transaction-list">
+                            <li>
+                                <span class="transaction-type income">+</span>
+                                <span class="transaction-description">Received from John Doe</span>
+                                <span class="transaction-amount">$50.00</span>
+                                <span class="transaction-date">Jul 15, 2025</span>
+                            </li>
+                            <li>
+                                <span class="transaction-type expense">-</span>
+                                <span class="transaction-description">Sent to Jane Smith</span>
+                                <span class="transaction-amount">$25.00</span>
+                                <span class="transaction-date">Jul 14, 2025</span>
+                            </li>
+                            <li>
+                                <span class="transaction-type income">+</span>
+                                <span class="transaction-description">Deposit from Bank</span>
+                                <span class="transaction-amount">$500.00</span>
+                                <span class="transaction-date">Jul 12, 2025</span>
+                            </li>
+                            <li>
+                                <span class="transaction-type expense">-</span>
+                                <span class="transaction-description">Online Purchase - Store X</span>
+                                <span class="transaction-amount">$15.75</span>
+                                <span class="transaction-date">Jul 10, 2025</span>
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-small view-all-transactions">View All Transactions</a>
+                    </div>
+                </div>
+
+                <!-- Spending Overview / Analytics (simple text-based) -->
+                <div class="feature-item dashboard-card full-width-card">
+                    <div class="feature-text">
+                        <h4>Spending Overview</h4>
+                        <p>This month, you've spent <strong>$150.25</strong> and received <strong>$600.00</strong>.</p>
+                        <p class="light-text-color">Categorized spending charts coming soon!</p>
+                        <!-- Could embed a simple image here if desired -->
+                        <img src="https://placehold.co/300x150/282828/ffffff?text=Spending+Graph" alt="Spending Graph Placeholder" style="max-width: 100%; height: auto; margin-top: 1rem; border-radius: 5px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Payments FORever. All rights reserved.</p>
+            <p><small>This site uses third-party services like PayPal to facilitate secure login and payments. By continuing, you agree to our Terms of Service and Privacy Policy.</small></p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Ensure the menu toggle script is loaded and functional
+        // This script is already in script.js and registered in index.html
+        // You might want to add specific dashboard JS here later, e.g.,
+        // to fetch balance or transactions dynamically.
+
+        // Example: Populate user name (if logged in via localStorage from login.html)
+        document.addEventListener('DOMContentLoaded', () => {
+            const userNameElement = document.querySelector('.content-section h2');
+            const storedUser = localStorage.getItem('user');
+            if (userNameElement && storedUser) {
+                try {
+                    const user = JSON.parse(storedUser);
+                    if (user && user.name) {
+                        userNameElement.textContent = `Welcome to Your Dashboard, ${user.name}!`;
+                    }
+                } catch (e) {
+                    console.error("Failed to parse user from localStorage:", e);
+                }
+            }
+        });
+
+        // Register service worker (same as other pages)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered! Scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

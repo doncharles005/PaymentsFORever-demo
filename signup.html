@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Payments FORever - Sign Up</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="images/icons/icon-72x72.png" type="image/png">
+
+    <style>
+        /* Specific styles for the signup page, similar to login.html */
+        .signup-main {
+            padding: 4rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+        }
+
+        .signup-section {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column; /* Stack on small screens */
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .signup-image-container {
+            flex: 1;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .signup-image {
+            width: 100%;
+            height: 250px; /* Fixed height for image on small screens */
+            object-fit: cover;
+            display: block;
+        }
+
+        .signup-form-container {
+            flex: 1;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .signup-form-container h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .signup-form-container p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* Form specific styles (using existing variables and basic form elements) */
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem; /* Space between form fields */
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"] {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: #333; /* Slightly darker than card-bg for input */
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="email"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: var(--primary-color);
+        }
+
+        .form-group small {
+            display: block;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--light-text-color);
+        }
+
+        /* Reusing the .btn class for the submit button */
+        .signup-form .btn {
+            width: 100%;
+            margin-top: 1.5rem;
+            padding: 1rem;
+        }
+
+        .existing-account-link {
+            margin-top: 1.5rem;
+            font-size: 0.95rem;
+            color: var(--light-text-color);
+        }
+
+        .existing-account-link a {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Responsive Design for Signup Page (similar to login) */
+        @media (min-width: 768px) {
+            .signup-section {
+                flex-direction: row; /* Side-by-side on larger screens */
+                text-align: left; /* Align text to left within containers */
+            }
+
+            .signup-image-container {
+                flex: 1;
+            }
+
+            .signup-image {
+                height: 100%;
+                max-height: 450px;
+            }
+
+            .signup-form-container {
+                flex: 1;
+                padding: 3rem;
+                text-align: left;
+            }
+
+            .signup-form-container h2 {
+                font-size: 2.5rem;
+            }
+
+            .signup-form-container p {
+                font-size: 1.05rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .signup-form-container {
+                padding: 4rem;
+            }
+
+            .signup-form-container h2 {
+                font-size: 2.8rem;
+            }
+
+            .signup-form-container p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">Payments FORever</a></h1>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html" class="active">Sign Up</a></li> <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="contact.html">Support</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="signup-main container">
+        <section class="signup-section">
+            <div class="signup-image-container">
+                <img src="https://shorturl.at/BMnG2" alt="Secure signup" class="signup-image">
+            </div>
+
+            <div class="signup-form-container">
+                <h2>Join Payments FORever Today!</h2>
+                <p>Create your free account to start sending, receiving, and managing money securely with ease. It's fast, simple, and reliable.</p>
+
+                <form class="signup-form" action="#" method="POST">
+                    <div class="form-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                        <small>We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Create a strong password" required>
+                        <small>Password must be at least 8 characters long, including a number and a special character.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Re-enter your password" required>
+                    </div>
+
+                    <button type="submit" class="btn">Create Account</button>
+                </form>
+
+                <p class="existing-account-link">Already have an account? <a href="login.html">Login here!</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Payments FORever. All rights reserved.</p>
+            <p><small>This site uses third-party services like PayPal to facilitate secure login and payments. By continuing, you agree to our Terms of Service and Privacy Policy.</small></p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Placeholder for client-side form validation or submission logic
+        const signupForm = document.querySelector('.signup-form');
+        if (signupForm) {
+            signupForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const fullName = document.getElementById('fullName').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+
+                if (password !== confirmPassword) {
+                    alert('Passwords do not match!');
+                    return;
+                }
+
+                // Basic password strength check (for demonstration)
+                const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+                if (!passwordRegex.test(password)) {
+                    alert('Password must be at least 8 characters long and include a number and a special character.');
+                    return;
+                }
+
+                // In a real application, you would send this data to a backend server
+                // for user registration and proper authentication.
+                console.log('Signup form submitted!');
+                console.log('Full Name:', fullName);
+                console.log('Email:', email);
+                // DO NOT log password in a real app, this is for demonstration only
+                console.log('Password:', password); 
+
+                // Simulate successful signup and redirect
+                alert('Account created successfully! Redirecting to login page...');
+                window.location.href = 'login.html'; 
+            });
+        }
+
+        // Register service worker (same as other pages)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered! Scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

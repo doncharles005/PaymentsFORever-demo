@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a1a">
+    <title>Contact Us - Payments FORever</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" href="images/icons/icon-72x72.png" type="image/png">
+
+    <!-- Internal Styling for Contact Page -->
+    <style>
+        /* Main container for the contact page content */
+        .contact-main {
+            padding: 4rem 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Align content to the top */
+            min-height: calc(100vh - 120px); /* Adjust based on header/footer height */
+        }
+
+        .contact-section {
+            background-color: var(--card-bg-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            padding: 2.5rem 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p.section-description {
+            font-size: 1.1rem;
+            color: var(--light-text-color);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* Grid for contact methods - adapting games-grid concept */
+        .contact-methods-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Single column on mobile */
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-method-card {
+            /* Reusing feature-item styles for card appearance */
+            background-color: #333; /* Darker background for card */
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .contact-method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .contact-method-card .icon-placeholder {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .contact-method-card h3 {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-method-card p {
+            font-size: 1rem;
+            color: var(--light-text-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method-card a {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-method-card a:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .contact-hours {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px dashed var(--border-color);
+            color: var(--light-text-color);
+            font-size: 0.95rem;
+        }
+
+        .contact-hours h4 {
+            font-size: 1.4rem;
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Responsive Design for Contact Page */
+        @media (min-width: 600px) { /* Adjust for larger phones/small tablets */
+            .contact-methods-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* 2 columns or more */
+            }
+        }
+
+        @media (min-width: 768px) { /* Tablet */
+            .contact-section {
+                padding: 3.5rem 2.5rem;
+            }
+
+            .contact-section h2 {
+                font-size: 2.8rem;
+            }
+
+            .contact-section p.section-description {
+                font-size: 1.2rem;
+            }
+
+            .contact-methods-grid {
+                gap: 2rem;
+            }
+
+            .contact-method-card h3 {
+                font-size: 1.8rem;
+            }
+
+            .contact-method-card p {
+                font-size: 1.05rem;
+            }
+
+            .contact-hours h4 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (min-width: 1024px) { /* Desktop */
+            .contact-section {
+                padding: 4rem 3rem;
+            }
+
+            .contact-section h2 {
+                font-size: 3.2rem;
+            }
+
+            .contact-section p.section-description {
+                font-size: 1.3rem;
+            }
+
+            .contact-methods-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 3 columns or more */
+                gap: 2.5rem;
+            }
+
+            .contact-method-card h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container header-content">
+            <h1 class="logo"><a href="index.html">Payments FORever</a></h1>
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Sign Up</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="contact.html" class="active">Support</a></li> <!-- Mark Support as active -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contact-main container">
+        <section class="contact-section">
+            <h2>Get in Touch with Payments FORever Support</h2>
+            <p class="section-description">We're here to help! Choose the most convenient way to reach us for any questions, support, or feedback.</p>
+
+            <div class="contact-methods-grid">
+                <!-- Email Support Card -->
+                <div class="contact-method-card">
+                    <div class="icon-placeholder">@</div>
+                    <h3>Email Support</h3>
+                    <p>For general inquiries or detailed assistance.</p>
+                    <p><a href="mailto:support@paymentsforever.com">support@paymentsforever.com</a></p>
+                </div>
+
+                <!-- Phone Support Card -->
+                <div class="contact-method-card">
+                    <div class="icon-placeholder">📞</div>
+                    <h3>Phone Support</h3>
+                    <p>Speak directly with our support team.</p>
+                    <p><a href="tel:+18001234567">1-800-123-4567</a></p>
+                </div>
+
+                <!-- FAQ / Help Center Card -->
+                <div class="contact-method-card">
+                    <div class="icon-placeholder">?</div>
+                    <h3>Visit Our Help Center</h3>
+                    <p>Find answers to common questions and guides.</p>
+                    <p><a href="#">paymentsforever.com/help</a></p>
+                </div>
+
+                <!-- Live Chat (Placeholder) -->
+                <div class="contact-method-card">
+                    <div class="icon-placeholder">💬</div>
+                    <h3>Live Chat</h3>
+                    <p>Instant support during business hours.</p>
+                    <p><a href="#">Chat Now</a></p>
+                </div>
+            </div>
+
+            <div class="contact-hours">
+                <h4>Support Hours:</h4>
+                <p>Monday - Friday: 9:00 AM - 5:00 PM (EST)</p>
+                <p>Saturday: 10:00 AM - 2:00 PM (EST)</p>
+                <p>Sunday: Closed</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container footer-content">
+            <p>&copy; 2025 Payments FORever. All rights reserved.</p>
+            <p><small>This site uses third-party services like PayPal to facilitate secure login and payments. By continuing, you agree to our Terms of Service and Privacy Policy.</small></p>
+            <div class="social-links">
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Register service worker (same as other pages)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('Service Worker registered! Scope:', registration.scope);
+                    })
+                    .catch(err => {
+                        console.log('Service Worker registration failed:', err);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
